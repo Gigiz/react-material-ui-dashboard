@@ -3,15 +3,18 @@ import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { makeStyles } from '@material-ui/core/styles';
 import Main from '@src/containers/Main/Main';
+import UserContextProvider from '@src/models/context/UserContext/UserContext';
 
 const App = () => {
   const classes = useStyles();
   
   return <BrowserRouter>
-    <CssBaseline />
-    <div className={classes.root}>
-      <Main />
-    </div>
+    <UserContextProvider>
+      <CssBaseline />
+      <div className={classes.root}>
+        <Main />
+      </div>
+    </UserContextProvider>
   </BrowserRouter>
 };
 
