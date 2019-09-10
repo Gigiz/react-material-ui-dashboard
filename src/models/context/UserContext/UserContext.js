@@ -8,6 +8,8 @@ const UserContextProvider = ({ children }) => {
     authenticated: false,
     user: null,
   };
+
+  console.log('user context');
   
   return <UserContext.Provider value={currentUserContext}>
     {children}
