@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -10,26 +11,34 @@ import { makeStyles } from '@material-ui/core/styles';
 import TopMenuProfile from '@src/components/TopMenuProfile/TopMenuProfile';
 import { UserContext } from '@src/models/context/UserContext/UserContext';
 
-const TopMenu = () => {
+const TopMenu = ({ history }) => {
   const classes = useStyles();
   const { authenticated } = useContext(UserContext);
 
   return <AppBar position='static'>
     <Toolbar>
-      {authenticated && <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+      {authenticated && <IconButton edge='start' className={classes.menuButton} color='inherit' aria-label='menu'>
         <MenuIcon />
       </IconButton>}
       <Typography variant='h6' className={classes.title}>
         <Link className={classes.link} to='/'>Family Assistant</Link>
       </Typography>
       {!authenticated
-        ? <Button color='inherit'><Link className={classes.link} to='/login'>Login</Link></Button>
+        ? <Button
+            color='inherit'
+            onClick={() => { history.push('/login'); }}>
+            Login
+          </Button>
         : <TopMenuProfile />}
     </Toolbar>
   </AppBar>;
 };
 
-export default TopMenu;
+TopMenu.propTypes = {
+  history: PropTypes.object,
+};
+
+export default withRouter(TopMenu);
 
 function useStyles() {
   return makeStyles(theme => ({
