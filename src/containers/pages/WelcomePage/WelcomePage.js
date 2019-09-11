@@ -4,15 +4,16 @@ import { withRouter } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { makeStyles } from '@material-ui/core/styles';
+import MainContainer from '@src/components/MainContainer/MainContainer';
 import { UserContext } from '@src/models/context/UserContext/UserContext';
 
 const WelcomePage = ({ history }) => {
   const classes = useStyles();
-  const [ data, setData ] = useState([]);
+  const [data, setData] = useState([]);
   const { authenticated } = useContext(UserContext);
 
   if (authenticated) {
@@ -29,75 +30,71 @@ const WelcomePage = ({ history }) => {
     fetchData();
   }, []);
 
-  return <div className={classes.main}>
-    <div className={classes.root}>
-      <div className={classes.content}>
-        <div className={classes.text}>
-          <Typography
-            variant='h3'
-            align='center'
-            component='h1'
-            color='inherit'
-            gutterBottom
-            className={classes.title}
-          >
-            {'Family Assistant'}
-          </Typography>
-          <Typography
-            variant='h5'
-            component='h2'
-            color='inherit'
-            gutterBottom
-            className={classes.h5}
-          >
-            {'React Starter-Kit with all Most Wanted features.'}
-          </Typography>
-          <Button
-            onClick={() => { history.push('/login'); }}
-            className={classes.button}
-            variant='outlined'
-            color='primary'
-          >
-            {'Get Started'}
-          </Button>
-        </div>
-        <div className={classes.cardsContent}>
-          {data.length > 0 && data.map(user => <Card key={user.id} className={classes.card}>
-            <CardContent>
-              <Typography variant="h5" component="h2">
-                {`User #${user.id}`}
-              </Typography>
-              <br />
-              <Typography className={classes.pos} color="textSecondary">
-                {`${user.first_name} ${user.last_name}`}
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button
-                variant='contained'
-                size='small'
-                onClick={() => {
-                  var win = window.open(user.avatar, '_blank');
-                  win.focus();
-                }}
-              >
-                Show
-              </Button>
-            </CardActions>
-          </Card>)}
-          {data.length === 0 && [1,2,3].map(id => <Card key={id} className={classes.card}>
-            <CardContent>
-              <Skeleton />
-              <Skeleton />
-            </CardContent>
-            <CardActions>
-              <Skeleton variant="rect" width={48} height={22} />
-            </CardActions>
-          </Card>)}
-        </div>
-      </div>
+  return <MainContainer>
+    <div className={classes.text}>
+      <Typography
+        variant='h3'
+        align='center'
+        component='h1'
+        color='inherit'
+        gutterBottom
+        className={classes.title}
+      >
+        {'Family Assistant'}
+      </Typography>
+      <Typography
+        variant='h5'
+        component='h2'
+        color='inherit'
+        gutterBottom
+        className={classes.h5}
+      >
+        {'Some people I\'ve witnessed today'}
+      </Typography>
+      <Button
+        onClick={() => { history.push('/login'); }}
+        className={classes.button}
+        variant='outlined'
+        color='primary'
+      >
+        {'Get Started'}
+      </Button>
     </div>
-  </div>;
+    <div className={classes.cardsContent}>
+      {data.length > 0 && data.map(user => <Card key={user.id} className={classes.card}>
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            {`User #${user.id}`}
+          </Typography>
+          <br />
+          <Typography className={classes.pos} color="textSecondary">
+            {`${user.first_name} ${user.last_name}`}
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button
+            variant='contained'
+            size='small'
+            onClick={() => {
+              var win = window.open(user.avatar, '_blank');
+              win.focus();
+            }}
+          >
+            Show
+              </Button>
+        </CardActions>
+      </Card>)}
+      {data.length === 0 && [1, 2, 3].map(id => <Card key={id} className={classes.card}>
+        <CardContent>
+          <Skeleton />
+          <Skeleton />
+        </CardContent>
+        <CardActions>
+          <Skeleton variant="rect" width={48} height={22} />
+        </CardActions>
+      </Card>)}
+    </div>
+  </MainContainer>;
 };
 
 WelcomePage.propTypes = {
@@ -108,21 +105,6 @@ export default withRouter(WelcomePage);
 
 function useStyles() {
   return makeStyles(theme => ({
-    main: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginTop: theme.spacing(2),
-    },
-    root: {
-      flexGrow: 1,
-      flex: '1 0 100%',
-    },
-    content: {
-      height: '100%',
-      [theme.breakpoints.up('sm')]: {
-        paddingTop: theme.spacing(1)
-      },
-    },
     text: {
       display: 'flex',
       flexDirection: 'column',
