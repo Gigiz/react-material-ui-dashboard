@@ -21,7 +21,7 @@ const TopMenu = ({ history }) => {
         <MenuIcon />
       </IconButton>}
       <Typography variant='h6' className={classes.title}>
-        <Link className={classes.link} to='/'>Family Assistant</Link>
+        <Link className={classes.link} to='/'>Root</Link>
       </Typography>
       {!authenticated
         ? <Button
