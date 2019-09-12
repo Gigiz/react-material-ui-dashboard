@@ -1,7 +1,5 @@
 const admin = require('firebase-admin');
 
-admin.initializeApp();
-
 const firestore = admin.firestore();
 
 const createUserProfile = (userRecord, context) => {
@@ -10,7 +8,12 @@ const createUserProfile = (userRecord, context) => {
   return firestore
     .collection('users')
     .doc(uid)
-    .set({ email, displayName, registrationDate: new Date() })
+    .set({
+      email,
+      displayName,
+      registrationDate: new Date(),
+      rooms: []
+    })
     .catch(console.error);
 };
 
