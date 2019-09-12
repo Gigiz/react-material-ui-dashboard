@@ -27,8 +27,8 @@ const WelcomePage = ({ history }) => {
       data.data.length = 3;
       setData(data.data);
     }
-    fetchData();
-  }, []);
+    if (!authenticated) fetchData();
+  }, [authenticated]);
 
   return <MainContainer>
     <div className={classes.text}>
@@ -40,7 +40,7 @@ const WelcomePage = ({ history }) => {
         gutterBottom
         className={classes.title}
       >
-        {'Family Assistant'}
+        {'Material UI Test'}
       </Typography>
       <Typography
         variant='h5'
