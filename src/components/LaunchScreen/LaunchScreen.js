@@ -4,7 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const LaunchScreen = () => {
   const classes = useStyles();
-  return <CircularProgress className={classes.circularProgress} />;
+  return <div className={classes.circularProgress}><CircularProgress /></div>;
 };
 
 export default LaunchScreen;
@@ -12,9 +12,10 @@ export default LaunchScreen;
 function useStyles() {
   return makeStyles(() => ({
     circularProgress: {
-      position: 'absolute',
-      top: '50%',
-      left: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      height: '100vh',
     },
   }))();
 }
