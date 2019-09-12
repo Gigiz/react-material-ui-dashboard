@@ -64,7 +64,7 @@ const TopMenuProfile = ({ history }) => {
       onClose={handleCloseProfileMenu}
     >
       <MenuItem onClick={handleCloseProfileMenu}>Profile</MenuItem>
-      <MenuItem onClick={handleLogoutUser}>My account</MenuItem>
+      <MenuItem onClick={handleLogoutUser}>Logout</MenuItem>
     </Menu>
   </div>
 };
