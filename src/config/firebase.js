@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
+import 'firebase/functions';
 import 'firebase/firestore';
 import 'firebase/messaging';
 
@@ -28,5 +29,7 @@ const firebaseConfig = {
 export const firebaseApp = firebase.initializeApp(
   process.env.NODE_ENV !== 'production' ? firebaseConfig.development : firebaseConfig.production,
 );
+
+export const firestore = firebaseApp.firestore();
 
 export const GOOGLE_AUTH_PROVIDER = firebase.auth.GoogleAuthProvider.PROVIDER_ID;
