@@ -13,27 +13,27 @@ const UserContextProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const unsubscribe = firebaseApp.auth().onAuthStateChanged(user => {
-      if (user) {
-        setCurrentUserContext({
-          fetching: true,
-          authenticated: true,
-          user,
-        })
-      } else {
-        setCurrentUserContext({
-          fetching: true,
-          authenticated: false,
-          user: null,
-        })
-      }
-    });
+    
+    if (!currentUserContext.fetching) {
+      firebaseApp.auth().onAuthStateChanged(user => {
+        if (user) {
+          console.log(user);
+          setCurrentUserContext({
+            fetching: true,
+            authenticated: true,
+            user,
+          })
+        } else {
+          setCurrentUserContext({
+            fetching: true,
+            authenticated: false,
+            user: null,
+          })
+        }
+      });
+    }
 
-    return () => {
-      unsubscribe();
-    };
-
-  }, [currentUserContext.authenticated]);
+  }, [currentUserContext.fetching]);
 
   console.log('user context');
   
